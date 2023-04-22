@@ -13,7 +13,7 @@
       <Link to="/">Home</Link>
       <Link to="Login">Login</Link>
     </nav>
-    <div>
+    <div class="h-full">
       <Route path="/">
         <Home/>
       </Route>
