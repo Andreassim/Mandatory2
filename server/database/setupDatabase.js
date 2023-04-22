@@ -1,4 +1,5 @@
 import db from "./connection.js";
+import bcrypt from "bcrypt";
 
 const isDeleteMode = process.argv.findIndex((argument) => argument === "delete_mode") === -1 ? false : true;
 
@@ -31,14 +32,12 @@ await db.exec(
 );
 
 if(isDeleteMode) {
+    const adminPassword = await bcrypt.hash("admin", 12);
 
-    //Planets
+    
+    await db.exec(`INSERT INTO users (email, password) VALUES ("admin@admin.com", "${adminPassword}")`);
 
-    db.exec(`INSERT INTO users (email, password) VALUES ("admin@admin.com", "admin")`);
 
-
-    //People
-
-    db.exec(`INSERT INTO permissions (user_id, is_admin) VALUES (1, True)`);
+    await db.exec(`INSERT INTO permissions (user_id, is_admin) VALUES (1, True)`);
 
 }
