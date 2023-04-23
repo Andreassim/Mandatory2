@@ -1,11 +1,8 @@
 <script>
     import {BASE_URL} from "../../store/globalsStore.js"
     import toast from "svelte-french-toast";
-
-    console.log("we are at least here");
     
     const handleSubmit = async (e) =>{
-        console.log("start");
         const ACTION_URL = e.target.action;
 
         const formData = new FormData(e.target);
