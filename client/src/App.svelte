@@ -4,6 +4,8 @@
     import Login from "./pages/Login/Login.svelte";
     import TailwindCss from "./css/TailwindCSS.svelte";
     import {Toaster} from "svelte-french-toast";
+    import {user} from "./store/userStore";
+    import {BASE_URL} from "./store/globalsStore.js"
 </script>
 
 <TailwindCss/>
@@ -13,7 +15,11 @@
   <Router>
     <nav>
       <Link to="/">Home</Link>
-      <Link to="Login">Login</Link>
+      {#if (!$user)}
+        <Link to="Login">Login</Link>
+      {:else}
+        <a href="${BASE_URL}/logout">Logout</a>
+      {/if}
     </nav>
     <div class="h-full">
       <Route path="/">

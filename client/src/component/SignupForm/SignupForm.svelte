@@ -1,11 +1,8 @@
 <script>
     import {BASE_URL} from "../../store/globalsStore.js"
     import toast from "svelte-french-toast";
-
-    console.log("we are at least here");
-    
+  
     const handleSubmit = async (e) =>{
-        console.log("start");
         const ACTION_URL = e.target.action;
 
         const formData = new FormData(e.target);
@@ -24,7 +21,7 @@
             if(!data.ok){
                 throw data;
             }
-            toast.success(`Logged in`, {
+            toast.success(`User created`, {
                     position: "bottom-center"
                 });
             toast.loading(`redirecting`, {
@@ -47,13 +44,13 @@
     <div class="py-1">
         <label for="email">Email</label>
         <div>
-            <input class=" text-xl" type="email" placeholder="email" name="email">
+            <input class=" text-xl" type="email" placeholder="email" name="email" required>
         </div>
     </div>
     <div class="py-1">
         <label for="password">Password</label>
         <div>
-            <input class=" text-xl" type="password" placeholder="password" name="password">
+            <input class=" text-xl" type="password" placeholder="password" name="password" required>
         </div>
     </div>
     <div>

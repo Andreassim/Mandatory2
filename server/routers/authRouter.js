@@ -27,7 +27,7 @@ router.post("/login", async (req, res) => {
 
     req.session.user = user;
 
-    res.send({message: "we did it"});
+    res.status(200).send({message: "logged in", user: user});
 });
 
 export default router;

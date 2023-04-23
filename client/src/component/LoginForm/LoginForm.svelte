@@ -1,5 +1,6 @@
 <script>
     import {BASE_URL} from "../../store/globalsStore.js"
+    import {user} from "../../store/userStore.js";
     import toast from "svelte-french-toast";
     
     const handleSubmit = async (e) =>{
@@ -14,12 +15,12 @@
         }
 
         try{
-            const data = await fetch(ACTION_URL, {
+            const response = await fetch(ACTION_URL, {
                 method: 'POST',
                 body: body
             })
-            if(!data.ok){
-                throw data;
+            if(!response.ok){
+                throw response;
             }
             toast.success(`Logged in`, {
                     position: "bottom-center"
@@ -28,7 +29,11 @@
                     position: "bottom-center",
                     duration: 3000
                 });
-            // Do something good
+
+            const data = await response.json();
+            $user = data.user;
+
+            //redirect?
 
         }
         catch (errors){

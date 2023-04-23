@@ -26,6 +26,9 @@ app.use(session({
 import authRouter from "./routers/authRouter.js";
 app.use(authRouter);
 
+import usersRouter from "./routers/usersRouter.js"
+app.use(usersRouter);
+
 app.get("/", (req, res) => {
     if(req.session.user){
         return res.send({user: req.session.user});
