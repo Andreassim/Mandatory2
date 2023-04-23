@@ -1,4 +1,49 @@
-<form class="p-5">
+<script>
+    import {BASE_URL} from "../../store/globalsStore.js"
+    import toast from "svelte-french-toast";
+
+    console.log("we are at least here");
+    
+    const handleSubmit = async (e) =>{
+        console.log("start");
+        const ACTION_URL = e.target.action;
+
+        const formData = new FormData(e.target);
+        const body = new URLSearchParams();
+        for(let field of formData){
+            const [key, value] = field;
+            // @ts-ignore
+            body.append(key, value);
+        }
+
+        try{
+            const data = await fetch(ACTION_URL, {
+                method: 'POST',
+                body: body
+            })
+            if(!data.ok){
+                throw data;
+            }
+            toast.success(`Logged in`, {
+                    position: "bottom-center"
+                });
+            toast.loading(`redirecting`, {
+                    position: "bottom-center",
+                    duration: 3000
+                });
+            // Do something good
+
+        }
+        catch (errors){
+            const response  = await errors.json();
+            toast.error(`${errors.status} ${errors.statusText} \n\n ${response.message}`, {
+                    position: "bottom-center"
+                });
+        }
+    };
+</script>
+
+<form class="p-5" action="{$BASE_URL}/users" on:submit|preventDefault={handleSubmit} >
     <div class="py-1">
         <label for="email">Email</label>
         <div>

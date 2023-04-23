@@ -1,8 +1,55 @@
-<form class="p-5">
+<script>
+    import {BASE_URL} from "../../store/globalsStore.js"
+    import toast from "svelte-french-toast";
+
+    console.log("we are at least here");
+    
+    const handleSubmit = async (e) =>{
+        console.log("start");
+        const ACTION_URL = e.target.action;
+
+        const formData = new FormData(e.target);
+        const body = new URLSearchParams();
+        for(let field of formData){
+            const [key, value] = field;
+            // @ts-ignore
+            body.append(key, value);
+        }
+
+        try{
+            const data = await fetch(ACTION_URL, {
+                method: 'POST',
+                body: body
+            })
+            if(!data.ok){
+                throw data;
+            }
+            toast.success(`Logged in`, {
+                    position: "bottom-center"
+                });
+            toast.loading(`redirecting`, {
+                    position: "bottom-center",
+                    duration: 3000
+                });
+            // Do something good
+
+        }
+        catch (errors){
+            const response  = await errors.json();
+            toast.error(`${errors.status} ${errors.statusText} \n\n ${response.message}`, {
+                    position: "bottom-center"
+                });
+        }
+    };
+
+
+</script>
+
+<form class="p-5" action="{$BASE_URL}/login" on:submit|preventDefault={handleSubmit}>
     <div class="py-1">
         <label for="email">Email</label>
         <div>
-            <input class=" text-xl" type="email" placeholder="email" name="email">
+            <input class=" text-xl" type="email" placeholder="email" name="email" value="test@test.com">
         </div>
     </div>
     <div class="py-1">
@@ -12,6 +59,6 @@
         </div>
     </div>
     <div class="py-1">
-        <button class="h-full w-full bg-blue-800 hover:bg-blue-400 hover:transition">Login</button>
+        <button type="submit" class="h-full w-full bg-blue-800 hover:bg-blue-400 hover:transition">Login</button>
     </div>
 </form>
