@@ -22,13 +22,12 @@
                 throw data;
             }
             toast.success(`User created`, {
-                    position: "bottom-center"
+                position: "bottom-center"
                 });
             toast.loading(`redirecting`, {
-                    position: "bottom-center",
-                    duration: 3000
+                position: "bottom-center",
+                duration: 3000
                 });
-            // Do something good
 
         }
         catch (errors){

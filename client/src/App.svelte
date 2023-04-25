@@ -5,8 +5,9 @@
     import TailwindCss from "./css/TailwindCSS.svelte";
     import {Toaster} from "svelte-french-toast";
     import {user} from "./store/userStore";
-    import {BASE_URL} from "./store/globalsStore.js"
-</script>
+    import {BASE_URL} from "./store/globalsStore.js";
+    import Logout from "./component/Logout/Logout.svelte";
+    </script>
 
 <TailwindCss/>
 
@@ -18,7 +19,7 @@
       {#if (!$user)}
         <Link to="Login">Login</Link>
       {:else}
-        <a href="${BASE_URL}/logout">Logout</a>
+        <Logout/>
       {/if}
     </nav>
     <div class="h-full">

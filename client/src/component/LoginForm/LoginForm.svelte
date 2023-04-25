@@ -1,7 +1,10 @@
 <script>
+    import { useNavigate } from "svelte-navigator";
     import {BASE_URL} from "../../store/globalsStore.js"
     import {user} from "../../store/userStore.js";
     import toast from "svelte-french-toast";
+
+    const navigate = useNavigate();
     
     const handleSubmit = async (e) =>{
         const ACTION_URL = e.target.action;
@@ -25,18 +28,22 @@
             toast.success(`Logged in`, {
                     position: "bottom-center"
                 });
-            toast.loading(`redirecting`, {
-                    position: "bottom-center",
-                    duration: 3000
-                });
 
             const data = await response.json();
             $user = data.user;
 
-            //redirect?
+            toast.loading(`redirecting`, {
+                    position: "bottom-center",
+                    duration: 2000
+                });
+
+            setTimeout(() => {
+                navigate("/");
+                }, 2000);
 
         }
         catch (errors){
+            console.log(errors);
             const response  = await errors.json();
             toast.error(`${errors.status} ${errors.statusText} \n\n ${response.message}`, {
                     position: "bottom-center"
