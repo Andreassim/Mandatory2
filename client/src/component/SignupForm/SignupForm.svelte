@@ -14,25 +14,24 @@
         }
 
         try{
-            const data = await fetch(ACTION_URL, {
+            const response = await fetch(ACTION_URL, {
                 method: 'POST',
                 body: body
             })
-            if(!data.ok){
-                throw data;
+
+            if(!response.ok){
+                throw response;
             }
             toast.success(`User created`, {
                 position: "bottom-center"
                 });
-            toast.loading(`redirecting`, {
-                position: "bottom-center",
-                duration: 3000
-                });
+
+            //TODO Login user or move to login
 
         }
-        catch (errors){
-            const response  = await errors.json();
-            toast.error(`${errors.status} ${errors.statusText} \n\n ${response.message}`, {
+        catch (err){
+            //TODO Add error message from body 
+            toast.error(`${err.status} ${err.statusText}`, {
                     position: "bottom-center"
                 });
         }

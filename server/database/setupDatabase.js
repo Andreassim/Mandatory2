@@ -13,7 +13,7 @@ await db.exec(
     CREATE TABLE IF NOT EXISTS users
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL
     )
     `
@@ -36,7 +36,6 @@ if(isDeleteMode) {
 
     
     await db.exec(`INSERT INTO users (email, password) VALUES ("admin@admin.com", "${adminPassword}")`);
-
 
     await db.exec(`INSERT INTO permissions (user_id, is_admin) VALUES (1, True)`);
 

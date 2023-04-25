@@ -12,12 +12,12 @@ router.post("/users", async (req, res) => {
     const password = await bcrypt.hash(req.body.password, 12);
     // query
     try{
-        const user = await db.run("INSERT INTO users (email, password) VALUES (?, ?)", [req.body.email, password])
-        delete user['password']
-        return res.status(200).send({message: "user created", user: user});
-    }
-    catch (errors){
-        return res.sendStatus(400);
+        await db.run("INSERT INTO users (email, password) VALUES (?, ?)", [req.body.email, password]);
+
+        return res.status(200).send({message: "user created"});
+        
+    } catch (err){
+        return res.status(400).send({message: "users already exists"});
     }
 })
 
