@@ -34,12 +34,12 @@
 
             toast.loading(`redirecting`, {
                     position: "bottom-center",
-                    duration: 2000
+                    duration: 1000
                 });
 
             setTimeout(() => {
                 navigate("/");
-                }, 2000);
+                }, 1000);
 
         }
         catch (errors){

@@ -4,6 +4,8 @@
     import { BASE_URL } from "../../store/globalsStore.js";
     import { useNavigate } from "svelte-navigator";
 
+    const navigate = useNavigate();
+
     const handleLogout = async () => {
 
         const ACTION_URL = $BASE_URL + "/logout";
@@ -21,10 +23,9 @@
                 duration: 500
         });
 
-        const navigate = useNavigate();
         setTimeout(() => {
                 navigate("/");
-                }, 500);
+                }, 200);
 
     };
 </script>
