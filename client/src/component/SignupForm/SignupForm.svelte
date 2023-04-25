@@ -30,8 +30,8 @@
 
         }
         catch (err){
-            //TODO Add error message from body 
-            toast.error(`${err.status} ${err.statusText}`, {
+            let body = await err.json();
+            toast.error(`${err.status} ${err.statusText} \n\n ${body.message}`, {
                     position: "bottom-center"
                 });
         }
