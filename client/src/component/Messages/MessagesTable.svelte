@@ -10,6 +10,7 @@
         });
         const json = await response.json();
         $messages = json.data;
+        console.log($messages);
     });
 
 </script>

@@ -8,7 +8,7 @@ router.get("/messages", requireUser, async (req, res) => {
 
     const data = messages.map(message => {
         const result = {};
-        if(message.is_censored === 'true'){
+        if(message.is_censored == 'true' || message.is_censored == 1){
             result.message = "**** CENSORED ****";
         }else {
             result.message = message.message;
@@ -33,9 +33,13 @@ router.post("/messages", requireUser, async (req, res) => {
     });
 });
 
-router.patch("/messages/:id", requireAdmin, async (req, res) => {
+router.patch("/messages/:id", requireUser ,requireAdmin, async (req, res) => {
+    const isCensored = req.body.is_censored == "on" ? true : false;
+    console.log(isCensored);
     const messageId = req.params.id;
-    const { changes } = await db.run("UPDATE messages SET is_censored = ? WHERE id = ? ", [req.query.is_censored, messageId]);
+    const { changes } = await db.run("UPDATE messages SET is_censored = ? WHERE id = ? ", [isCensored, messageId]);
+
+    console.log(changes);
 
     res.status(200).send({
         data: {

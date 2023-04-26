@@ -1,5 +1,6 @@
 <script>
-    import MessagesForm from "../../component/Messages/MessagesForm.svelte";
+    import CensorMessageForm from "../../component/Messages/CensorMessageForm.svelte";
+import MessagesForm from "../../component/Messages/MessagesForm.svelte";
 import MessagesTable from "../../component/Messages/MessagesTable.svelte";
     import Messages from "../../component/Messages/MessagesTable.svelte";
     import { BASE_URL } from "../../store/globalsStore";
@@ -18,6 +19,10 @@ import MessagesTable from "../../component/Messages/MessagesTable.svelte";
             Welcome user # {$user.id}
             <MessagesTable/>
             <MessagesForm/>
+                {#if ($user.is_admin)}
+                    You are the admin
+                    <CensorMessageForm/>
+                {/if}
             {:else}
             Login to display your messages
             {/if}
