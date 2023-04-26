@@ -22,7 +22,7 @@
 
 </script>
 
-<div class="border-2 rounded-md h-1/3">
+<div class="border-2 rounded-md h-min">
     <div class="grid grid-cols-10">
         <div class="col-span-5 py-2 h-100 w-100 border-r hover:bg-slate-500 {currentForm === 0 ? 'bg-slate-500' : ''}" on:click={toggleLogin} on:keydown={toggleLogin}>
             <h1>Login</h1>

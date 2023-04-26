@@ -7,7 +7,7 @@ import db from "../database/connection.js";
 
 router.get("/logout", (req, res) => {
     req.session.destroy(() => {
-        res.status(200).send({message: "logged out"});
+        return res.status(200).send({message: "logged out"});
     });
 });
 
@@ -26,8 +26,9 @@ router.post("/login", async (req, res) => {
     delete user['password'];
 
     req.session.user = user;
+    req.session.save();
 
-    res.status(200).send({message: "logged in", user: user});
+    return res.status(200).send({message: "logged in", user: user});
 });
 
 export default router;

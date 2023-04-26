@@ -6,6 +6,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+import session from "express-session";
+app.use(session({
+    name: "howdyID",
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
+}));
+
 import cors from "cors";
 app.use(cors({
     credentials: true,
@@ -15,25 +24,21 @@ app.use(cors({
 import helmet from "helmet";
 app.use(helmet());
 
-import session from "express-session";
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
-  }));
-
 import authRouter from "./routers/authRouter.js";
 app.use(authRouter);
 
-import usersRouter from "./routers/usersRouter.js"
+import usersRouter from "./routers/usersRouter.js";
 app.use(usersRouter);
 
+import messagesRouter from "./routers/messagesRouter.js";
+app.use(messagesRouter);
+
 app.get("/", (req, res) => {
+    console.log(req.session);
     if(req.session.user){
         return res.send({user: req.session.user});
     }
-    res.send({message: "hello"})
+    res.send({message: "hello"});
 });
 
 

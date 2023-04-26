@@ -5,7 +5,7 @@
     import toast from "svelte-french-toast";
 
     const navigate = useNavigate();
-    
+   
     const handleSubmit = async (e) =>{
         const ACTION_URL = e.target.action;
 
@@ -20,11 +20,13 @@
         try{
             const response = await fetch(ACTION_URL, {
                 method: 'POST',
-                body: body
+                body: body,
+                credentials: "include"
             })
             if(!response.ok){
                 throw response;
             }
+
             toast.success(`Logged in`, {
                     position: "bottom-center"
                 });
