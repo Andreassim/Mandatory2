@@ -48,7 +48,9 @@
     };
 </script>
 
-<form class="w-full" action="{$BASE_URL}/messages" on:submit|preventDefault={handleSubmit}>
-    <input class="w-3/5" type="text" name="message" placeholder="new message">
-    <button class="w-1/5 bg-blue-800 hover:bg-blue-400 hover:transition">Submit</button>
-</form>
+<div class="py-5">
+    <form class="w-full" action="{$BASE_URL}/messages" on:submit|preventDefault={handleSubmit}>
+        <input class="w-3/5" type="text" name="message" placeholder="new message">
+        <button class="w-1/5 bg-blue-800 hover:bg-blue-400 hover:transition">Submit</button>
+    </form>
+</div>

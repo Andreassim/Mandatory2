@@ -20,8 +20,10 @@ import MessagesTable from "../../component/Messages/MessagesTable.svelte";
             <MessagesTable/>
             <MessagesForm/>
                 {#if ($user.is_admin)}
-                    You are the admin
-                    <CensorMessageForm/>
+                    <div class="border">
+                        You are the admin
+                        <CensorMessageForm/>
+                    </div>
                 {/if}
             {:else}
             Login to display your messages

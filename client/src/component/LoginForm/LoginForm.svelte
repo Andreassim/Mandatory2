@@ -60,7 +60,7 @@
     <div class="py-1">
         <label for="email">Email</label>
         <div>
-            <input class=" text-xl" type="email" placeholder="email" name="email" value="test@test.com">
+            <input class=" text-xl" type="email" placeholder="email" name="email">
         </div>
     </div>
     <div class="py-1">

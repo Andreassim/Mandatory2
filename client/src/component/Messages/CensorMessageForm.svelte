@@ -48,10 +48,12 @@
         }
     };
 </script>
-
-<form class="w-full" action="{$BASE_URL}/messages" on:submit|preventDefault={handleSubmit}>
-    <input class="w-1/5" type="number" name="id" placeholder="message id">
-    <label for="is_censored">Censor</label>
-    <input type="checkbox" name="is_censored" placeholder="message id">
-    <button class="w-1/5 bg-red-800 hover:bg-red-400 hover:transition">CENSOR &#x26A0</button>
-</form>
+<div class="py-5">
+    <h1>Censor messages. They do not have to be displayed in your list</h1>
+    <form class="w-full" action="{$BASE_URL}/messages" on:submit|preventDefault={handleSubmit}>
+        <input class="w-1/5" type="number" name="id" placeholder="message id">
+        <label for="is_censored">Censor</label>
+        <input type="checkbox" name="is_censored" placeholder="message id">
+        <button class="w-1/5 bg-red-800 hover:bg-red-400 hover:transition">CENSOR &#x26A0</button>
+    </form>
+</div>

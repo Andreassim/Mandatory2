@@ -10,11 +10,10 @@
         });
         const json = await response.json();
         $messages = json.data;
-        console.log($messages);
     });
 
 </script>
-
+<h1>This table displays your messages</h1>
 <table class="text-left">
     <thead>
         <th>#</th>
