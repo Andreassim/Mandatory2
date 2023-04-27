@@ -33,14 +33,5 @@ app.use(usersRouter);
 import messagesRouter from "./routers/messagesRouter.js";
 app.use(messagesRouter);
 
-app.get("/", (req, res) => {
-    console.log(req.session);
-    if(req.session.user){
-        return res.send({user: req.session.user});
-    }
-    res.send({message: "hello"});
-});
-
-
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, console.log(`server is running on port: ${PORT}`));
